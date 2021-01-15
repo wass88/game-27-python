@@ -110,7 +110,7 @@ class Player:
                 self.game.act(action)
                 return (False, "")
             if cmd[1] == "pass":
-                action = Action(False, int(cmd[2]), int(cmd[3]))
+                action = Action(False, 0, 0)
                 self.game.act(action)
                 return (False, "")
         if cmd[0] == "result":
