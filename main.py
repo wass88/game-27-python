@@ -52,19 +52,20 @@ class Game:
         self.first_turn = not self.first_turn
     
     def move(self, x: int, i: int):
+        print(self.board)
         if not 0 <= x < SIZE:
-            raise ValueError("The position is out of board")
+            raise ValueError("The position is out of board x={}".format(x))
         if not len(self.board[x]) > 0:
-            raise ValueError("There is no tower")
+            raise ValueError("There is no tower x={}".format(x))
         if not self.board[x][0] == self.current_player():
-            raise ValueError("The tower is not yours")
+            raise ValueError("The tower is not yours x={}".format(x))
         if not i <= len(self.board[x]):
-            raise ValueError("The move is too big to move")
+            raise ValueError("The move is too big to move x={}".format(x))
 
         towers = self.towers()
         target = x + towers * self.current_player()
         if not 0 <= target < SIZE:
-            raise ValueError("The move is out of board")
+            raise ValueError("The move is out of board x={}".format(x))
 
         self.board[target] = self.board[x][:i] + self.board[target]
         self.board[x] = self.board[x][i:]
@@ -110,7 +111,7 @@ class Player:
                 self.game.act(action)
                 return (False, "")
             if cmd[1] == "pass":
-                action = Action(False, 0, 0)
+                action = Action(True, 0, 0)
                 self.game.act(action)
                 return (False, "")
         if cmd[0] == "result":
@@ -123,6 +124,8 @@ class Player:
 
     def thinking(self) -> Action:
         moves = self.game.playable()
+        print(self.game.__str__())
+        print(moves)
 
         # TODO: create AI!
         move = moves[0]
