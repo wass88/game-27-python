@@ -52,7 +52,6 @@ class Game:
         self.first_turn = not self.first_turn
     
     def move(self, x: int, i: int):
-        print(self.board)
         if not 0 <= x < SIZE:
             raise ValueError("The position is out of board x={}".format(x))
         if not len(self.board[x]) > 0:
@@ -124,8 +123,6 @@ class Player:
 
     def thinking(self) -> Action:
         moves = self.game.playable()
-        print(self.game.__str__())
-        print(moves)
 
         # TODO: create AI!
         move = moves[0]
